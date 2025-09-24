@@ -1,0 +1,354 @@
+<!--
+Project: Retro-Futurista - Streamer Website
+Files included below (paste each into its own file):
+  - index.html
+  - blog.html
+  - assets/ (place your images in assets/ folder; placeholders used)
+
+How to preview:
+  1. Save index.html and blog.html in the same folder.
+  2. Create an assets/ folder with images named gallery1.jpg ... gallery6.jpg and thumbnails for posts if desired.
+  3. Open index.html in your browser.
+
+This project uses Tailwind Play CDN for rapid prototyping and Google Fonts for "Press Start 2P" and "Inter".
+--><!-- ==========================
+     index.html
+========================== --><!doctype html>
+
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NeoRetro Streamer — Inicio</title>  <!-- Tailwind Play CDN -->  <script src="https://cdn.tailwindcss.com"></script>  <!-- Google Fonts -->  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">  <style>
+    /* Base colors */
+    :root{
+      --bg: #110E1B;
+      --neon-purple: #8A2BE2; /* morado neón principal */
+      --accent-yellow: #FFD400;
+      --muted: #BDB7C6;
+    }
+
+    /* Apply fonts */
+    .font-press{ font-family: 'Press Start 2P', monospace; }
+    .font-inter{ font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+
+    body{ background: var(--bg); color: #EDE8F5; }
+
+    /* Subtle dotted matrix background */
+    .matrix-bg{
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 12px 12px;
+    }
+
+    /* Fixed header blur */
+    header{
+      backdrop-filter: blur(6px);
+      background: linear-gradient(90deg, rgba(17,14,27,0.55), rgba(17,14,27,0.35));
+    }
+
+    /* Neon glow effect utility */
+    .neon-glow{
+      text-shadow: 0 0 6px rgba(138,43,226,0.9), 0 0 18px rgba(138,43,226,0.65);
+    }
+
+    .neon-button{
+      color: white;
+      background: linear-gradient(90deg, rgba(138,43,226,0.12), rgba(255,212,0,0.06));
+      border: 1px solid rgba(138,43,226,0.45);
+      box-shadow: 0 0 16px rgba(138,43,226,0.25), 0 6px 18px rgba(0,0,0,0.35);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .neon-button:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 0 28px rgba(138,43,226,0.6), 0 10px 30px rgba(0,0,0,0.45);
+    }
+
+    /* Card hover glow */
+    .card-hover:hover{ box-shadow: 0 0 24px rgba(138,43,226,0.25), 0 8px 30px rgba(0,0,0,0.6); }
+
+    /* Carousel track animation - infinite scroll */
+    .carousel{
+      overflow: hidden;
+      position: relative;
+    }
+    .carousel-track{
+      display: flex;
+      width: calc(200%);
+      animation: scroll-left 24s linear infinite;
+    }
+    .carousel-track img{ width: 280px; height: 160px; object-fit: cover; margin-right: 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
+    @keyframes scroll-left{
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Make carousel smoother on hover */
+    .carousel:hover .carousel-track{ animation-play-state: paused; }
+
+    /* small neon outline for left border of blog cards (used on blog page too) */
+    .left-neon{ box-shadow: inset 6px 0 24px -6px rgba(138,43,226,0.75); }
+
+    /* small responsive tweaks */
+    @media (max-width: 640px){ .carousel-track img{ width:220px; height:130px; } }
+  </style></head>
+<body class="matrix-bg font-inter min-h-screen leading-relaxed">  <!-- Header (fixed) -->  <header class="fixed w-full z-40 top-0 left-0">
+    <nav class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3 neon-glow font-press text-sm text-white">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="opacity-95"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.2"/></svg>
+        Adekyu
+      </a>
+      <div class="space-x-6 text-sm">
+        <a href="#about" class="hover:neon-glow">Sobre Mí</a>
+        <a href="#videos" class="hover:neon-glow">Videos</a>
+        <a href="#gallery" class="hover:neon-glow">Galería</a>
+        <a href="blog.html" class="hover:neon-glow">Blog</a>
+      </div>
+    </nav>
+  </header>  <main class="pt-20">
+    <!-- Welcome -->
+    <section id="welcome" class="min-h-[72vh] flex items-center justify-center text-center px-6">
+      <div class="max-w-4xl">
+        <h1 class="font-press text-2xl md:text-4xl text-white neon-glow">Adekyu — Streamer Independiente</h1>
+        <p class="mt-6 text-lg md:text-xl text-gray-300">Curiosidades clásicas y noches de charla. Bienvenido a la sala donde la nostalgia gana.</p><div class="mt-8">
+      <a href="#videos" class="inline-block px-6 py-4 neon-button rounded-2xl font-inter font-semibold shadow-lg hover:neon-glow">Ver mis últimos streams</a>
+    </div>
+
+    <div class="mt-10 flex items-center justify-center gap-4">
+      <div class="text-center">
+        <div class="text-xs text-muted text-gray-400">Sigueme en</div>
+        <div class="flex gap-3 mt-2">
+          <a href="#" aria-label="Instagram" class="p-2 rounded-md hover:neon-glow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="white" stroke-width="1.2"></rect></svg></a>
+          <a href="#" aria-label="YouTube" class="p-2 rounded-md hover:neon-glow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 8l6 4-6 4V8z" stroke="white" stroke-width="1.2"/></svg></a>
+          <a href="#" aria-label="Twitch" class="p-2 rounded-md hover:neon-glow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h14v12l-4 4H8l-4-4V4z" stroke="white" stroke-width="1.2"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sobre Mí -->
+<section id="about" class="max-w-6xl mx-auto px-6 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+    <div class="md:col-span-2">
+      <h2 class="font-press text-xl neon-glow">Sobre Mí</h2>
+      <p class="mt-4 text-gray-300">Soy Adekyu, un streamer que revive los juegos clásicos y no tan clasicos con streams diarios. Aquí encontrarás curiosidades, reseñas cortas y la comunidad más amable.</p>
+      <ul class="mt-4 text-sm text-gray-400 space-y-2">
+        <li>🎮 Retos y diversión</li>
+        <li>🕹 Retrospectivas de consolas clásicas</li>
+        <li>💬 Charla en vivo y minijuegos interactivos</li>
+      </ul>
+    </div>
+
+    <div class="p-4 rounded-xl bg-gradient-to-br from-black/40 to-white/2 border border-white/5 card-hover">
+      <img src="img/preview.jpg" alt="avatar" class="w-full rounded-lg object-cover h-44" onerror="this.src='https://via.placeholder.com/400x220?text=Avatar'">
+      <div class="mt-4 text-sm text-gray-300">Pro tip: Entra al chat y escribe !retro para ver el overlay secreto.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Videos Destacados -->
+<section id="videos" class="max-w-6xl mx-auto px-6 py-12">
+  <h2 class="font-press text-xl neon-glow">Videos Destacados</h2>
+  <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Example video cards -->
+    <article class="p-4 rounded-xl bg-[#0f0b12] border border-white/5 card-hover">
+      <div class="aspect-video bg-black rounded-md overflow-hidden">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed//MnVgOWll7Bo?si=qQEQJuKcirwzllfs" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <h3 class="mt-3 font-semibold text-gray-100">Partida tensa, tryhardeo al maximo</h3>
+      <p class="mt-1 text-sm text-gray-400">Que dices, soy buenisimo en esto.</p>
+    </article>
+
+    <article class="p-4 rounded-xl bg-[#0f0b12] border border-white/5 card-hover">
+      <div class="aspect-video bg-black rounded-md overflow-hidden">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/MtxgpYAFb90?si=hfGa7ArEaCl87n-p" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <h3 class="mt-3 font-semibold text-gray-100">Cayendo en la locura</h3>
+      <p class="mt-1 text-sm text-gray-400">Me gusta el Lol, si, estoy loco.</p>
+    </article>
+
+    <article class="p-4 rounded-xl bg-[#0f0b12] border border-white/5 card-hover">
+      <div class="aspect-video bg-black rounded-md overflow-hidden">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/41YvUbE3fjc?si=2RCYtpK1idsEOI1A" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <h3 class="mt-3 font-semibold text-gray-100">El inicio</h3>
+      <p class="mt-1 text-sm text-gray-400">Que mejor que el inicio para comenzar.</p>
+    </article>
+  </div>
+</section>
+
+<!-- Galería (carousel) -->
+<section id="gallery" class="max-w-6xl mx-auto px-6 py-12">
+  <h2 class="font-press text-xl neon-glow">Galería</h2>
+  <div class="mt-6 carousel">
+    <div class="carousel-track">
+      <!-- Duplicate image set for seamless infinite scroll -->
+      <img src="img/Neutral.png" alt="gallery1" onerror="this.src='https://via.placeholder.com/280x160?text=1'">
+      <img src="img/minecraft.jpg" alt="gallery2" onerror="this.src='https://via.placeholder.com/280x160?text=2'">
+      <img src="img/hollow.jpg" alt="gallery3" onerror="this.src='https://via.placeholder.com/280x160?text=3'">
+      <img src="img/pokemon.jpg" alt="gallery4" onerror="this.src='https://via.placeholder.com/280x160?text=4'">
+      <img src="img/Deltarune.jpg" alt="gallery5" onerror="this.src='https://via.placeholder.com/280x160?text=5'">
+      <img src="img/reto.jpg" alt="gallery6" onerror="this.src='https://via.placeholder.com/280x160?text=6'">
+
+      <!-- duplicated -->
+      <img src="img/Neutral.png" alt="gallery1-2" onerror="this.src='https://via.placeholder.com/280x160?text=1'">
+      <img src="img/minecraft.jpg" alt="gallery2-2" onerror="this.src='https://via.placeholder.com/280x160?text=2'">
+      <img src="img/hollow.jpg" alt="gallery3-2" onerror="this.src='https://via.placeholder.com/280x160?text=3'">
+      <img src="img/pokemon.jpg" alt="gallery4-2" onerror="this.src='https://via.placeholder.com/280x160?text=4'">
+      <img src="img/Deltarune.jpg" alt="gallery5-2" onerror="this.src='https://via.placeholder.com/280x160?text=5'">
+      <img src="img/reto.jpg" alt="gallery6-2" onerror="this.src='https://via.placeholder.com/280x160?text=6'">
+    </div>
+  </div>
+</section>
+
+<!-- Blog preview -->
+<section id="blog" class="max-w-6xl mx-auto px-6 py-12">
+  <h2 class="font-press text-xl neon-glow">Blog</h2>
+  <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <article class="p-4 rounded-xl bg-[#0f0b12] border-l-4 border-l-yellow-400 card-hover">
+      <div class="text-xs text-gray-400">Sep 18, 2025</div>
+      <h3 class="mt-2 font-semibold text-gray-100">Cómo preparar un maratón retro</h3>
+      <p class="mt-2 text-sm text-gray-400">Consejos prácticos para planear y sobrevivir una sesión de 12 horas con juego cooperativo.</p>
+    </article>
+
+    <article class="p-4 rounded-xl bg-[#0f0b12] border-l-4 border-l-purple-600 card-hover">
+      <div class="text-xs text-gray-400">Ago 30, 2025</div>
+      <h3 class="mt-2 font-semibold text-gray-100">Top 7 consolas subestimadas</h3>
+      <p class="mt-2 text-sm text-gray-400">Una lista breve de hardware clásico que merecía más amor.</p>
+    </article>
+
+    <article class="p-4 rounded-xl bg-[#0f0b12] border-l-4 border-l-yellow-400 card-hover">
+      <div class="text-xs text-gray-400">Jul 12, 2025</div>
+      <h3 class="mt-2 font-semibold text-gray-100">Guía rápida de setups económicos</h3>
+      <p class="mt-2 text-sm text-gray-400">Cómo montar un entorno de streaming retro sin gastar una fortuna.</p>
+    </article>
+  </div>
+  <div class="mt-6 text-right">
+    <a href="blog.html" class="font-inter underline hover:neon-glow">Ver todos los artículos →</a>
+  </div>
+</section>
+
+  </main>  <!-- Footer -->  <footer class="mt-12 border-t border-white/5 py-8">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+      <div>© <span id="year"></span> NeoRetro — Todos los derechos reservados.</div>
+      <div class="flex gap-4">
+        <a href="https://www.instagram.com/adekyu_live?igsh=MXVnOGg4ZXNiY3Z2OA==" class="hover:neon-glow">Instagram</a>
+        <a href="https://www.youtube.com/@Adekyu01/featured" class="hover:neon-glow">YouTube</a>
+        <a href="https://www.twitch.tv/adekyu01" class="hover:neon-glow">Twitch</a>
+      </div>
+    </div>
+  </footer>  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Make carousel track width dynamic so animation works reliably
+    function adjustCarousel(){
+      const track = document.querySelector('.carousel-track');
+      if(!track) return;
+      // The track is already prepared with duplicate images in markup.
+      // Nothing else required for the simple approach.
+    }
+    window.addEventListener('load', adjustCarousel);
+  </script></body>
+</html><!-- ==========================
+     blog.html
+========================== --><!doctype html>
+
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NeoRetro Streamer — Blog</title>  <script src="https://cdn.tailwindcss.com"></script>  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">  <style>
+    :root{ --bg:#110E1B; --neon-purple:#8A2BE2; --accent-yellow:#FFD400; }
+    body{ background: var(--bg); color: #EDE8F5; }
+    .font-press{ font-family: 'Press Start 2P', monospace; }
+    .font-inter{ font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+
+    .neon-glow{ text-shadow: 0 0 6px rgba(138,43,226,0.9), 0 0 18px rgba(138,43,226,0.65); }
+
+    /* post card border highlight via pseudo-element */
+    .post-card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02)); border-radius: 12px; position: relative; overflow: hidden; }
+    .post-card::before{ content: ""; position: absolute; left:0; top:0; bottom:0; width:6px; border-radius: 2px; box-shadow: 0 0 18px rgba(0,0,0,0.4); }
+    .post-card[data-accent='yellow']::before{ background: linear-gradient(180deg, rgba(255,212,0,0.95), rgba(255,212,0,0.6)); box-shadow: 0 0 18px rgba(255,212,0,0.2); }
+    .post-card[data-accent='purple']::before{ background: linear-gradient(180deg, rgba(138,43,226,0.95), rgba(138,43,226,0.6)); box-shadow: 0 0 18px rgba(138,43,226,0.2); }
+    .post-card:hover{ box-shadow: 0 0 28px rgba(138,43,226,0.2), 0 10px 40px rgba(0,0,0,0.6); transform: translateY(-6px); transition: all .18s ease; }
+  </style></head>
+<body class="min-h-screen font-inter">  <header class="fixed w-full z-40 top-0 left-0 bg-gradient-to-b from-black/60 border-b border-white/3">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3 neon-glow font-press text-sm text-white">Bienvenido a Citrosquad </a>
+      <div class="text-sm text-gray-300">Blog — NeoRetro</div>
+    </div>
+  </header>  <main class="pt-20 max-w-6xl mx-auto px-6 py-12">
+    <h1 class="font-press text-xl neon-glow">Entradas recientes</h1><div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+  <!-- Post card template: set data-accent to 'purple' or 'yellow' -->
+  <article class="post-card p-6" data-accent="purple">
+    <div class="flex items-start gap-4">
+      <div class="flex-1">
+        <div class="text-xs text-gray-400">Sep 18, 2025</div>
+        <h2 class="mt-2 font-semibold text-white">Novedades, Silksong acaba de ser lanzado</h2>
+        <p class="mt-2 text-sm text-gray-300">El esperado juego indie desarrollado por team cherry fue lanzado hace unas semanas, corre a comprarlo.</p>
+        <div class="mt-4 flex items-center gap-3">
+          <a href="#" class="px-4 py-2 rounded-full border border-white/10 hover:neon-glow">Leer más</a>
+          <div class="text-xs text-gray-400">5 min read</div>
+        </div>
+      </div>
+      <img src="img/silksong.jpg" alt="post1" class="w-28 h-20 object-cover rounded-md hidden sm:block" onerror="this.src='https://via.placeholder.com/200x120?text=post1'">
+    </div>
+  </article>
+
+  <article class="post-card p-6" data-accent="yellow">
+    <div class="flex items-start gap-4">
+      <div class="flex-1">
+        <div class="text-xs text-gray-400">Ago 30, 2025</div>
+        <h2 class="mt-2 font-semibold text-white">Ya jugaste a este hermoso indie?</h2>
+        <p class="mt-2 text-sm text-gray-300">Ori and the blind forest es sin duda una experiencia que no te puedes perder.</p>
+        <div class="mt-4 flex items-center gap-3">
+          <a href="#" class="px-4 py-2 rounded-full border border-white/10 hover:neon-glow">Leer más</a>
+          <div class="text-xs text-gray-400">6 min read</div>
+        </div>
+      </div>
+      <img src="img/ori.jpg" alt="post2" class="w-28 h-20 object-cover rounded-md hidden sm:block" onerror="this.src='https://via.placeholder.com/200x120?text=post2'">
+    </div>
+  </article>
+
+  <article class="post-card p-6" data-accent="purple">
+    <div class="flex items-start gap-4">
+      <div class="flex-1">
+        <div class="text-xs text-gray-400">Jul 12, 2025</div>
+        <h2 class="mt-2 font-semibold text-white">No te pierdas lo nuevo de FNF</h2>
+        <p class="mt-2 text-sm text-gray-300">FNF se actualiza constantemente (uy si), no te pierdas las novedades.</p>
+        <div class="mt-4 flex items-center gap-3">
+          <a href="#" class="px-4 py-2 rounded-full border border-white/10 hover:neon-glow">Leer más</a>
+          <div class="text-xs text-gray-400">8 min read</div>
+        </div>
+      </div>
+      <img src="img/fnf.jpg" alt="post3" class="w-28 h-20 object-cover rounded-md hidden sm:block" onerror="this.src='https://via.placeholder.com/200x120?text=post3'">
+    </div>
+  </article>
+
+  <!-- More posts placeholder -->
+  <article class="post-card p-6" data-accent="yellow">
+    <div class="flex items-start gap-4">
+      <div class="flex-1">
+        <div class="text-xs text-gray-400">Jun 01, 2025</div>
+        <h2 class="mt-2 font-semibold text-white">Sale Balatrito?</h2>
+        <p class="mt-2 text-sm text-gray-300">Balatro Balatrez está jugando Balatro.</p>
+        <div class="mt-4 flex items-center gap-3">
+          <a href="#" class="px-4 py-2 rounded-full border border-white/10 hover:neon-glow">Leer más</a>
+          <div class="text-xs text-gray-400">7 min read</div>
+        </div>
+      </div>
+      <img src="img/balatro.jpg" alt="post4" class="w-28 h-20 object-cover rounded-md hidden sm:block" onerror="this.src='https://via.placeholder.com/200x120?text=post4'">
+    </div>
+  </article>
+
+</div>
+
+  </main>  <footer class="mt-12 border-t border-white/5 py-8">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between text-sm text-gray-400">
+      <div>© <span id="yearb"></span> NeoRetro — Blog.</div>
+      <a href="index.html" class="hover:neon-glow">Volver al inicio</a>
+    </div>
+  </footer>  <script>
+    document.getElementById('yearb').textContent = new Date().getFullYear();
+  </script></body>
+</html>
